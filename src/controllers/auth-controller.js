@@ -18,7 +18,7 @@ export const signUp = async(req, res) => {
     } catch (error) {
         // const msg = handleErrors(error);
         return res.status(500).json({
-            message: error,
+            error_message: error,
             created: false
         });
     }
@@ -39,7 +39,7 @@ export const logIn = async(req, res) => {
         // const msg = handleErrors(error);
         // console.log(msg)
         return res.status(500).json({
-            message: error,
+            error_message: error,
             status: false
         });
     }

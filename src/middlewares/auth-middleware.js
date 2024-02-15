@@ -1,7 +1,8 @@
+import User from "../models/user.js";
 
 export const AuthMiddleware = async (req, res, next) => {
     if(!req.body.email) {
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Please enter Email, Email is required',
             success: false,
         });
@@ -9,12 +10,21 @@ export const AuthMiddleware = async (req, res, next) => {
     }
 
     if(!req.body.password) {
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Please enter Password, Password is required',
             success: false,
         });
         // throw Error('Please enter Password, Password is required');
     }
 
+    const user = await User.findOne({email: req.body.email});
+    if(user) {
+        return res.status(500).json({
+            message: 'User with this email already exists',
+            success: false,
+        });
+    }
+
     next();
 }
+

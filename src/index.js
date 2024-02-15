@@ -20,7 +20,7 @@ app.use(cors({
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-    res.send('bobbyhadz.com');
+    res.send('hey');
   });
 app.use('/BloomCare', ApiRoutes);
 
