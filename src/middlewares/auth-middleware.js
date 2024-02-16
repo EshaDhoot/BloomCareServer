@@ -17,6 +17,14 @@ export const AuthMiddleware = async (req, res, next) => {
         // throw Error('Please enter Password, Password is required');
     }
 
+    if(!req.body.name) {
+        return res.status(500).json({
+            message: 'Please enter name, name is required',
+            success: false,
+        });
+        // throw Error('Please enter Password, Password is required');
+    }
+
     const user = await User.findOne({email: req.body.email});
     if(user) {
         return res.status(500).json({
