@@ -10,6 +10,9 @@ class CommentService {
     async create(threadId, userId, content) {
        
         var thread = await  this.threadRepository.get(threadId);
+        if(!thread) {
+            throw {message: 'Thread does not exist', code:404 };
+        }
         const comment = await this.commentRepository.create({
             content: content,
             userId: userId,

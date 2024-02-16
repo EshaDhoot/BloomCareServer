@@ -9,6 +9,9 @@ class LikeService {
 
     async toggleLike(threadId, userId) {
         var thread = await  this.threadRepository.find(threadId);
+        if(!thread) {
+            throw {message: 'Thread does not exist', code:404 };
+        }
         const exists = await this.likeRepository.findByUserAndLikeable({
             userId: userId,
             thread: threadId
